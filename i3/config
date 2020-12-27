@@ -198,15 +198,15 @@ bindsym $mod+r mode "resize"
 
 focus_follows_mouse no
 
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-exec_always --no-startup-id picom
-exec_always --no-startup-id xrandr --output eDP1 --primary --mode 1920x1080 --scale 0.80x0.80 --pos 1024x0 --rotate normal --output HDMI1 --mode 1024x768 --pos 0x0 --rotate normal
-#exec --no-startup-id xrandr --output HDMI-1 --scale 0.9999x0.9999
-exec --no-startup-id telegram-desktop -startintray
-exec --no-startup-id setxkbmap us altgr-intl
-exec --no-startup-id albert
-exec_always --no-startup-id ~/i3-switch-if-workspace-empty/i3-switch-if-workspace-empty --keep-same-output
-exec --no-startup-id feh --bg-fill --randomize ~/Downloads/wallpapers
+#exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+#exec_always --no-startup-id picom
+#exec_always --no-startup-id xrandr --output eDP1 --primary --mode 1920x1080 --scale 0.80x0.80 --pos 1024x0 --rotate normal --output HDMI1 --mode 1024x768 --pos 0x0 --rotate normal
+###exec --no-startup-id xrandr --output HDMI-1 --scale 0.9999x0.9999
+#exec --no-startup-id telegram-desktop -startintray
+#exec --no-startup-id setxkbmap us altgr-intl
+#exec --no-startup-id albert
+#exec_always --no-startup-id ~/i3-switch-if-workspace-empty/i3-switch-if-workspace-empty --keep-same-output
+#exec --no-startup-id feh --bg-fill --randomize ~/Downloads/wallpapers
 
 # shorcut to firefox
 bindsym $mod+b exec firefox
