@@ -39,8 +39,8 @@ exec --no-startup-id nm-applet
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+
-bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%-
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
@@ -49,6 +49,10 @@ bindsym XF86AudioPlay exec playerctl play-pause
 #bindsym XF86AudioPause exec playerctl pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
+
+# Brightness controls
+bindsym XF86MonBrightnessDown exec xbacklight -dec 5
+bindsym XF86MonBrightnessUp exec xbacklight -inc 5
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -198,18 +202,19 @@ bindsym $mod+r mode "resize"
 
 focus_follows_mouse no
 
-#exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-#exec_always --no-startup-id picom
-#exec_always --no-startup-id xrandr --output eDP1 --primary --mode 1920x1080 --scale 0.80x0.80 --pos 1024x0 --rotate normal --output HDMI1 --mode 1024x768 --pos 0x0 --rotate normal
-###exec --no-startup-id xrandr --output HDMI-1 --scale 0.9999x0.9999
-#exec --no-startup-id telegram-desktop -startintray
-#exec --no-startup-id setxkbmap us altgr-intl
-#exec --no-startup-id albert
-#exec_always --no-startup-id ~/i3-switch-if-workspace-empty/i3-switch-if-workspace-empty --keep-same-output
-#exec --no-startup-id feh --bg-fill --randomize ~/Downloads/wallpapers
+exec_always --no-startup-id setxkbmap us altgr-intl
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec_always --no-startup-id picom
+#exec --no-startup-id xrandr --dpi 113
+#exec --no-startup-id xrandr --output eDP1 --primary --mode 1920x1080 --scale 0.85x0.85 --pos 1024x0 --rotate normal --output HDMI1 --mode 1024x768 --pos 0x0 --rotate normal
+#exec --no-startup-id xrandr --output eDP1 --primary --mode 1920x1080 --scale 1x1 --pos 1024x0 --rotate normal --output HDMI1 --mode 1024x768 --pos 0x0 --rotate normal
+exec --no-startup-id telegram-desktop -startintray
+exec --no-startup-id albert
+exec_always --no-startup-id ~/i3-switch-if-workspace-empty/i3-switch-if-workspace-empty --keep-same-output
+exec --no-startup-id feh --bg-fill --randomize ~/Downloads/wallpapers
 
 # shorcut to firefox
-bindsym $mod+b exec firefox
+bindsym $mod+b exec firefox --browser
 
 # BetterlockScreen
 bindsym $mod+shift+x exec betterlockscreen -l dim
@@ -236,8 +241,13 @@ assign [class="(?i)kitty"] $ws2
 
 assign [class="(?i)discord"] $ws3
 assign [class="TelegramDesktop"] $ws3
+assign [class="Mumble"] $ws3
 
 assign [class="(?i)steam"] $ws4
+
+assign [class="(?i)zoom"] $ws5
+
+
 
 for_window [class="TelegramDesktop"] focus
 for_window [class="firefox"] focus
@@ -245,3 +255,5 @@ for_window [class="(?i)discord"] focus
 for_window [class="(?i)kitty"] focus
 
 focus_on_window_activation smart
+
+workspace $ws5 output primary
